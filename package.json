@@ -1,0 +1,24 @@
+{
+  "name": "my-vue-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@vueuse/core": "^6.9.1",
+    "element3": "0.0.40",
+    "vue": "^3.2.16",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue-jsx": "^1.2.0",
+    "axios": "^0.24.0",
+    "eslint": "^8.2.0",
+    "eslint-plugin-vue": "^8.1.1",
+    "sass": "^1.43.4",
+    "vite": "^2.6.4"
+  }
+}
