@@ -24,7 +24,7 @@ const store = createStore({
       setTimeout(() => {
         commit('add')
       }, 1000);
-    }
+    },
   }
 })
 

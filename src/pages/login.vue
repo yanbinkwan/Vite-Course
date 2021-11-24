@@ -17,6 +17,7 @@
       <el-button
         type="primary"
         @click="onSubmit"
+        :loading="loading"
       >
         登录
       </el-button>
@@ -26,29 +27,45 @@
 
 <script>
   import { ref, reactive, toRefs } from 'vue'
+  import {login} from '../api/apis'
+  import { Message } from 'element3'
+  import {useRouter} from 'vue-router'
+
   export default {
+  
     setup() {
       const formRef = ref(null)
+      const loading = ref(false)
       const data = reactive({
         form: {
           name: '',
           password: '',
         }
       })
-      const onSubmit = () => {
-        
-        console.log('submit!',data)
+      const router = useRouter()
+
+      const onSubmit = async () => {
+        loading.value = true
+        try{
+          const res = await login(data.form)
+          console.log(res);
+          router.replace('/')
+        }catch(error){
+          Message({
+            type: 'warning',
+            message: error
+          })
+        }finally{
+          loading.value = false
+        }
       }
 
       return {
         ...toRefs(data),
+        loading,
         formRef,
         onSubmit
       }
     }
   }
 </script>
-
-<style lang="sass">
-
-</style>

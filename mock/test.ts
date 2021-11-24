@@ -1,22 +1,50 @@
 import { MockMethod } from 'vite-plugin-mock';
+import { sign, verify } from 'jsonwebtoken';
+
+const secret = 'secret';
+
 export default [
   {
     url: '/api/get',
     method: 'get',
-    response: ({ query }) => {
-      return {
-        code: 0,
-        data: {
-          name: 'vben'
+    response: req => {
+      const token = req.headers['authorization'].split(' ')[1];
+      try {
+        var decoded: any = verify(token, secret)
+        if(decoded.user === 'dasheng'){
+          return {
+            code: 20000,
+            data: decoded.user
+          };
         }
-      };
+        throw new Error('Invalid token')
+      } catch(err) {
+        return {
+          code: 401,
+          data: 'Invalid token'
+        };
+      }
     }
   },
   {
     url: '/api/login',
     method: 'post',
     timeout: 2000,
-    response: (req, res) => {}
+    response: (req, res) => {
+      const body = req.body;
+      if (body.name !== 'dasheng' || body.password !== '123456') {
+        return { code: 60204, message: 'Username or password are incorrect.' };
+      }
+
+      const token = sign({ user: body.name }, secret, {
+        expiresIn: 60
+      });
+
+      return {
+        code: 20000,
+        data: token
+      };
+    }
   },
   {
     url: '/api/text',
