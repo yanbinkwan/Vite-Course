@@ -19,5 +19,5 @@ $ npm run dev
 ```
 
 # Default values
-Login user defualt name: **dasheng
+Login user defualt name: dasheng
 password: 123456
