@@ -1,30 +1,60 @@
 <template>
   <div class="box">
-    <h1 @click="toggle">click</h1>
-    <input type="text" v-model="title" @keydown.enter="addTodo" />
+    <h1 @click="toggle">
+      click
+    </h1>
+    <input
+      v-model="title"
+      type="text"
+      @keydown.enter="addTodo"
+    >
 
     <transition name="modal">
-      <div class="info-wrapper" v-if="showModal">
-        <div class="info">Dude, You entered nothing..</div>
+      <div
+        v-if="showModal"
+        class="info-wrapper"
+      >
+        <div class="info">
+          Dude, You entered nothing..
+        </div>
       </div>
     </transition>
 
-    <button v-if="active < all" @click="clear">Clear</button>
+    <button
+      v-if="active < all"
+      @click="clear"
+    >
+      Clear
+    </button>
 
     <ul v-if="todos.length">
       <transition-group name="flip">
-        <li v-for="todo in todos" :key="todo.title">
-          <input type="checkbox" v-model="todo.done" />
+        <li
+          v-for="todo in todos"
+          :key="todo.title"
+        >
+          <input
+            v-model="todo.done"
+            type="checkbox"
+          >
           <span :class="{ done: todo.done }">{{ todo.title }}</span>
-          <span class="remove-btn" @click="removeTodo($event, i)">❌</span>
+          <span
+            class="remove-btn"
+            @click="removeTodo($event, i)"
+          >❌</span>
         </li>
       </transition-group>
     </ul>
-    <div v-else>There's no data</div>
+    <div v-else>
+      There's no data
+    </div>
     <!-- Check Oprations-->
     <div>
       All
-      <input type="checkbox" v-model="allDone" />
+      <input
+        v-model="allDone"
+        type="checkbox"
+      >
       <span>{{ active }} / {{ all }}</span>
     </div>
   </div>
@@ -32,7 +62,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useFullscreen } from "@vueuse/core";
+import { useFullscreen } from "@vueuse/core"
 
 const { toggle } = useFullscreen()
 let { all, allDone, active, clear, addTodo, todos, title, showModal } = useTodos()
@@ -40,7 +70,7 @@ function removeTodo(e, i) { todos.value.splice(i, 1) }
 </script>
 
 <script>
-import { useStorage } from "../utils/storage";
+import { useStorage } from "../utils/storage"
 
 function useTodos() {
   let title = ref("")

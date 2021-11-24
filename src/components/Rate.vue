@@ -1,17 +1,32 @@
 <template>
   <div :style="fontStyle">
-    <slot></slot>
-    <div class="rate" @mouseout="mouseOut">
-      <span @mouseover="mouseOver(num)" v-for="num in 5" :key="num">☆</span>
-      <span class="hollow" :style="fontWidth">
-        <span @click="onRate(num)" @mouseover="mouseOver(num)" v-for="num in 5" :key="num">★</span>
+    <slot />
+    <div
+      class="rate"
+      @mouseout="mouseOut"
+    >
+      <span
+        v-for="num in 5"
+        :key="num"
+        @mouseover="mouseOver(num)"
+      >☆</span>
+      <span
+        class="hollow"
+        :style="fontWidth"
+      >
+        <span
+          v-for="num in 5"
+          :key="num"
+          @click="onRate(num)"
+          @mouseover="mouseOver(num)"
+        >★</span>
       </span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, defineEmits } from "vue";
+import { computed, ref, defineEmits } from "vue"
 let props = defineProps({
   modelValue: Number,
   theme: { type: String, default: 'orange' },

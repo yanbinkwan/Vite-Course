@@ -1,6 +1,6 @@
 
 <template>
-  <component :is="comp"></component>
+  <component :is="comp" />
 </template>
 <script setup>
 import { computed } from "vue"

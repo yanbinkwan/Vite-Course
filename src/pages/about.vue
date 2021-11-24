@@ -1,6 +1,8 @@
 <template>
-    <h1>这是关于页面</h1>
-    <Heading :level="3">hello geekbang</Heading>
+  <h1>这是关于页面</h1>
+  <Heading :level="3">
+    hello geekbang
+  </Heading>
 </template>
 
 <script setup>
